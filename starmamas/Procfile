@@ -1,0 +1,1 @@
+web: gunicorn starmamas.wsgi --log-file -
