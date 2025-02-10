@@ -1,24 +1,20 @@
 from pathlib import Path
 import os
-import django_heroku
 from dotenv import load_dotenv
-load_dotenv()
 
-SECRET_KEY = 'dummy-secret-key-for-development-only'
+# Load environment variables from .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-+n1pb*v$fb-$!_3h8w&#lb#%u2l)p+enc)kl85^5_f56y6$h(u')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-default-key-for-development')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 # Application definition
 INSTALLED_APPS = [
@@ -28,9 +24,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # Third party apps
     'crispy_forms',
     'crispy_bootstrap5',
-    'todo',  # Your app
+    
+    # Local apps
+    'todo',
 ]
 
 MIDDLEWARE = [
@@ -65,10 +65,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'starmamas.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://ekari:90plm90PLM@localhost:5432/starmamas', conn_max_age=600, ssl_require=False)
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'starmamas',
+        'USER': 'ekari',
+        'PASSWORD': '90plm90PLM',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'OPTIONS': {'sslmode': 'disable'}  # Disable SSL for local dev
+    }
 }
 
 # Password validation
@@ -94,13 +100,14 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 # Media files
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
@@ -111,12 +118,9 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Authentication Settings
-LOGIN_REDIRECT_URL = 'todo:home'
-LOGOUT_REDIRECT_URL = 'todo:login'
+LOGIN_REDIRECT_URL = 'todo_list'
+LOGOUT_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 
 # Messages
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
