@@ -17,7 +17,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-+n1pb*v$fb-$!_3h8w&#lb#%u2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['starmamas.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost']
 
 # Application definition
 INSTALLED_APPS = [
@@ -69,8 +69,12 @@ WSGI_APPLICATION = 'starmamas.wsgi.application'
 
 # Database
 DATABASES = {
-    'default': os.environ.get('DATABASE_URL')
-}                      
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
+
+
+
+                  
       
 AUTH_PASSWORD_VALIDATORS = [
     {
