@@ -2,10 +2,7 @@ from pathlib import Path
 import dj_database_url
 import os
 import django_heroku
-from dotenv import load_dotenv
-load_dotenv()
 
-SECRET_KEY = 'dummy-secret-key-for-development-only'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-+n1pb*v$fb-$!_3h8w&#lb#%u2l)p+enc)kl85^5_f56y6$h(u')
+SECRET_KEY = 'django-dev-123'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
@@ -66,10 +63,26 @@ WSGI_APPLICATION = 'starmamas.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# settings.py
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://ekari:90plm90PLM@localhost:5432/starmamas', conn_max_age=600, ssl_require=False)
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'starmamas',
+        'USER': 'ekari',
+        'PASSWORD': '90plm90PLM',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'OPTIONS': {'sslmode': 'disable'}  # Local override
+    }
 }
+
+# Heroku production config
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600,
+        ssl_require=True
+    )
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
