@@ -66,10 +66,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'starmamas.wsgi.application'
-
 # Database
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': dj_database_url.parse(
+        os.environ.get("DATABASE_URL", "postgresql://neondb_owner:npg_90ihMdWsyHuc@ep-odd-thunder-a2mo1qwd.eu-central-1.aws.neon.tech/last_armor_morse_320623")
+    )
 }
 
 
