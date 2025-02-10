@@ -1,15 +1,19 @@
 from pathlib import Path
 import os
+import django_heroku
 from dotenv import load_dotenv
-
-# Load environment variables from .env file
 load_dotenv()
+
+SECRET_KEY = 'dummy-secret-key-for-development-only'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-default-key-for-development')
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-+n1pb*v$fb-$!_3h8w&#lb#%u2l)p+enc)kl85^5_f56y6$h(u')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
@@ -66,15 +70,7 @@ WSGI_APPLICATION = 'starmamas.wsgi.application'
 
 # Database
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'starmamas',
-        'USER': 'ekari',
-        'PASSWORD': '90plm90PLM',
-        'HOST': 'localhost',
-        'PORT': '5432',
-        'OPTIONS': {'sslmode': 'disable'}  # Disable SSL for local dev
-    }
+    'default': dj_database_url.config(default='postgres://ekari:90plm90PLM@localhost:5432/starmamas', conn_max_age=600, ssl_require=False)
 }
 
 # Password validation
@@ -102,9 +98,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files
 MEDIA_URL = 'media/'
