@@ -5,6 +5,8 @@ import django_heroku
 from dotenv import load_dotenv
 load_dotenv()
 
+SECRET_KEY = 'dummy-secret-key-for-development-only'
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
