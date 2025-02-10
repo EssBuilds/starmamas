@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseNotAllowed
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -57,11 +58,30 @@ def add_task(request):
             task.save()
             messages.success(request, "Task added!")
             return redirect('todo:home')
-    return redirect('todo:home')
+    elif request.method == 'GET':
+        form = TaskForm()
+        return render(request, 'todo/add_task.html', {'form': form})
+    else:
+        return HttpResponseNotAllowed(['GET', 'POST'])
+
+@login_required
+def edit_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id, user=request.user)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Task updated!")
+            return redirect('todo:home')
+    else:
+        form = TaskForm(instance=task)
+    return render(request, 'todo/edit_task.html', {'form': form})
 
 @login_required
 def delete_task(request, task_id):
-    task = Task.objects.get(id=task_id, user=request.user)
-    task.delete()
-    messages.success(request, "Task deleted!")
-    return redirect('todo:home')
+    task = get_object_or_404(Task, id=task_id, user=request.user)
+    if request.method == 'POST':
+        task.delete()
+        messages.success(request, "Task deleted!")
+        return redirect('todo:home')
+    return HttpResponseNotAllowed(['POST'])
