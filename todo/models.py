@@ -1,99 +1,21 @@
-# Description: Defines the models for the To-Do List app.
-
-from django.db import models
+from django import forms
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from .models import Task, Child
 
-class Child(models.Model):
-    """
-    Represents a child associated with a user (e.g., family member).
-    """
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='children',  # Allows accessing children via user.children.all()
-        help_text="The parent user who added this child."
-    )
-    name = models.CharField(
-        max_length=100,
-        help_text="The name of the child."
-    )
-    age = models.PositiveIntegerField(
-        null=True,
-        blank=True,
-        help_text="The age of the child (optional)."
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        help_text="Timestamp when the child record was created."
-    )
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField(required=True)
 
-    def __str__(self):
-        return f"{self.name} ({self.age} years old)" if self.age else self.name
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
 
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ['title', 'description', 'completed']
 
-class Task(models.Model):
-    """
-    Represents a task in the to-do list.
-    """
-    PRIORITY_CHOICES = [
-        ('Low', 'Low'),
-        ('Medium', 'Medium'),
-        ('High', 'High'),
-    ]
-
-    STATUS_CHOICES = [
-        ('Pending', 'Pending'),
-        ('In Progress', 'In Progress'),
-        ('Completed', 'Completed'),
-    ]
-
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='tasks',  # Allows accessing tasks via user.tasks.all()
-        help_text="The user who created the task."
-    )
-    child = models.ForeignKey(
-        Child,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='tasks',  # Allows accessing tasks via child.tasks.all()
-        help_text="The child to whom the task is assigned (optional)."
-    )
-    title = models.CharField(
-        max_length=255,
-        help_text="A short description of the task."
-    )
-    description = models.TextField(
-        blank=True,
-        help_text="A detailed description of the task (optional)."
-    )
-    priority = models.CharField(
-        max_length=10,
-        choices=PRIORITY_CHOICES,
-        default='Medium',
-        help_text="The priority level of the task."
-    )
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default='Pending',
-        help_text="The current status of the task."
-    )
-    due_date = models.DateField(
-        null=True,
-        blank=True,
-        help_text="The deadline for completing the task (optional)."
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        help_text="Timestamp when the task was created."
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True,
-        help_text="Timestamp when the task was last updated."
-    )
-
-    def __str__(self):
-        return self.title
+class ChildForm(forms.ModelForm):
+    class Meta:
+        model = Child
+        fields = ['name', 'age']

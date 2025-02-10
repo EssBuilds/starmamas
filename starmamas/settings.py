@@ -115,9 +115,8 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Authentication Settings
-LOGIN_REDIRECT_URL = 'todo_list'
-LOGOUT_REDIRECT_URL = 'home'
-LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'todo:home'
+LOGOUT_REDIRECT_URL = 'todo:login'
 
 # Messages
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

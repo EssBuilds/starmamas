@@ -4,15 +4,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .models import Task, Child
-from django.contrib.auth.forms import AuthenticationForm
-from .forms import TaskForm, ChildForm, RegisterForm
+from .forms import TaskForm, ChildForm, RegisterForm, AuthenticationForm
 
 def home(request):
     if request.user.is_authenticated:
         tasks = Task.objects.filter(user=request.user)
         children = Child.objects.filter(user=request.user)
         return render(request, 'todo/home.html', {'tasks': tasks, 'children': children})
-    return render(request, 'todo/login.html')
+    return redirect('todo:login')
 
 def register(request):
     if request.method == 'POST':

@@ -1,20 +1,31 @@
-{% extends 'base.html' %}
+{% extends 'base_generic.html' %}
 {% load crispy_forms_tags %}
-
 {% block content %}
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="glass-card p-4">
-                <h2 class="text-center mb-4">Register</h2>
+                <h2 class="text-center mb-4">
+                    {% if form.instance.pk %}
+                        Edit Task
+                    {% else %}
+                        Add New Task
+                    {% endif %}
+                </h2>
                 <form method="post">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <button type="submit" class="btn btn-gradient w-100 mt-3">Register</button>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-gradient">
+                            {% if form.instance.pk %}
+                                Update Task
+                            {% else %}
+                                Add Task
+                            {% endif %}
+                        </button>
+                        <a href="{% url 'todo:home' %}" class="btn btn-light ms-2">Cancel</a>
+                    </div>
                 </form>
-                <div class="text-center mt-3">
-                    <p>Already have an account? <a href="{% url 'login' %}" class="nav-btn">Login</a></p>
-                </div>
             </div>
         </div>
     </div>
