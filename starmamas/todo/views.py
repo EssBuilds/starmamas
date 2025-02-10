@@ -1,6 +1,3 @@
-from django.shortcuts import render
-
-# Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
@@ -28,8 +25,6 @@ def register(request):
         form = RegisterForm()
     return render(request, 'todo/register.html', {'form': form})
 
-
-
 def user_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -45,7 +40,6 @@ def user_login(request):
     else:
         form = AuthenticationForm()
     return render(request, 'todo/login.html', {'form': form})
-
 
 @login_required
 def user_logout(request):
@@ -71,11 +65,3 @@ def delete_task(request, task_id):
     task.delete()
     messages.success(request, "Task deleted!")
     return redirect('todo:home')
-
-def logout_view(request):
-    logout(request)
-    messages.success(request, f'Successfully logged out!')
-    return redirect('todo:login')
-
-def home(request):
-    return render(request, 'todo/home.html')
