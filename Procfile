@@ -1,3 +1,3 @@
-web: gunicorn starmamas.wsgi
+web: gunicorn starmamas.wsgi --chdir starmamas
 
 
