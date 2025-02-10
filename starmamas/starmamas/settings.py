@@ -2,10 +2,8 @@ from pathlib import Path
 import os
 import django_heroku
 import dj_database_url
-from dotenv import load_dotenv
-load_dotenv()
 
-SECRET_KEY = 'dummy-secret-key-for-development-only'
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-+n1pb*v$fb-$!_3h8w&#lb#%u2l)p+enc)kl85^5_f56y6$h(u')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
+DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
@@ -71,10 +69,9 @@ WSGI_APPLICATION = 'starmamas.wsgi.application'
 
 # Database
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://ekari:90plm90PLM@localhost:5432/starmamas', conn_max_age=600, ssl_require=False)
-}
-
-# Password validation
+    'default': os.environ.get('DATABASE_URL')
+}                      
+      
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
