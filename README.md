@@ -324,10 +324,18 @@ We followed an Agile development methodology to ensure flexibility, collaboratio
 
 [View Project Board](https://github.com/EssBuilds/starmamas/projects?query=is%3Aopen)
 
+The project board for Star Mamas was used to manage tasks and track progress, with a focus on transparency and collaboration. This included the use of tools like Jira and GitHub Projects, ensuring that the project was well-organized and on track.
+
+The goal was to create a clear and consistent development process, with a focus on transparency and collaboration. This included the use of modern project management tools and practices, with a focus on efficiency and reliability. The result was a clear and consistent development process that made it easy for developers to track progress and manage tasks.
+
 *   Used GitHub Projects for task tracking and sprint management.
 *   Columns: Backlog, Sprint Planning, In Progress, Review, Done.
 
 Project Board Screenshot
+
+The sprint progress for Star Mamas was tracked using weekly sprints and daily standups, with a focus on continuous feedback and iteration. This included the use of tools like Jira and GitHub Projects, ensuring that the project was well-organized and on track.
+
+The goal was to create a clear and consistent development process, with a focus on transparency and collaboration. This included the use of modern project management tools and practices, with a focus on efficiency and reliability. The result was a clear and consistent development process that made it easy for developers to track progress and manage tasks.
 
 ### Sprint Progress
 
@@ -336,6 +344,10 @@ Project Board Screenshot
 *   **Sprint 3:** Child profile management and enhanced progress tracking.
 
 ### User Story Testing
+
+User story testing for authentication included scenarios for successful registration, login, and logout. This included the use of automated tests and manual testing, ensuring that the application met user needs and expectations.
+
+The goal was to create a user-friendly and reliable application, with a clear focus on user experience. This included the use of modern testing tools and practices, with a focus on automation and efficiency. The result was a user-friendly and reliable application that met the needs of its users.
 
 *   Used Gherkin syntax to define acceptance criteria for each user story.
 *   Automated tests to ensure features meet requirements.
