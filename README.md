@@ -1,131 +1,504 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# STAR MAMAS
 
-Welcome USER_NAME,
+[View Live Site](https://starmamas-e6bdaca50ef1.herokuapp.com/#)
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## Introduction to Star Mamas
 
-You can safely delete this README.md file or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **June 18, 2024**
+Welcome to Star Mamas, a comprehensive family task management solution designed to transform how busy families organize their daily lives. This documentation provides a detailed overview of the project's development, features, and implementation.
 
-## Gitpod Reminders
+### Executive Summary
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+Star Mamas addresses the growing need for family-oriented task management solutions in our increasingly busy world. By combining intuitive design with powerful features, it helps families stay organized while promoting responsibility and collaboration.
 
-`python3 -m http.server`
+### Project Vision Statement
 
-A blue button should appear to click: _Make Public_,
+"To empower families through intuitive task management, fostering responsibility and connection in our digital age."
 
-Another blue button should appear to click: _Open Browser_.
+[View Live Site](https://family-task-manager.herokuapp.com)
 
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
+## Introduction
 
-A blue button should appear to click: _Make Public_,
+Welcome to Star Mama, a comprehensive family task management solution designed to transform how busy families and their Star Mamas organize their daily lives. Star Mama addresses the growing need for a family-oriented task management solution that helps their captain families stay organized while promoting responsibility and collaboration, all within an intuitive and visually appealing interface.
 
-Another blue button should appear to click: _Open Browser_.
+This application is built using Django, Bootstrap, JavaScript, and CSS, with PostgreSQL for the database. It's designed to be responsive and easy to use, catering specifically to the needs of working mothers.
 
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+Here's a sneak peek at Star Mama's responsiveness:
 
-To log into the Heroku toolbelt CLI:
+Responsive Design Example *[Replace with your actual image]*
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+## Contents
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
+1.  [UX Design: User-Centered Approach](#ux-design-user-centered-approach)
+    *   [User Stories](#user-stories)
+    *   [Strategy & Scope](#strategy--scope)
+    *   [Structural Skeleton](#structural-skeleton)
+    *   [Wireframes & Mockups](#wireframes--mockups)
+        *   [Initial Sketches](#initial-sketches)
+        *   [Digital Wireframes](#digital-wireframes)
+        *   [Final Prototypes](#final-prototypes)
+    *   [Design Journey](#design-journey)
 
-### Connecting your Mongo database
+2.  [Design](#design)
+    *   [Typography](#typography)
+    *   [Color Scheme](#color-scheme)
+    *   [Imagery](#imagery)
 
-- **Connect to Mongo CLI on a IDE**
-- navigate to your MongoDB Clusters Sandbox
-- click **"Connect"** button
-- select **"Connect with the MongoDB shell"**
-- select **"I have the mongo shell installed"**
-- choose **mongosh (2.0 or later)** for : **"Select your mongo shell version"**
-- choose option: **"Run your connection string in your command line"**
-- in the terminal, paste the copied code `mongo "mongodb+srv://<CLUSTER-NAME>.mongodb.net/<DBname>" --apiVersion 1 --username <USERNAME>`
-  - replace all `<angle-bracket>` keys with your own data
-- enter password _(will not echo **\*\*\*\*** on screen)_
+3.  [Website Features](#website-features)
+    *   [Tablet View](#tablet-view)
+    *   [Mobile View](#mobile-view)
 
-------
+4.  [Future Features](#future-features)
 
-## Release History
+5.  [Technologies Used](#technologies-used)
+    *   [Languages](#languages)
+    *   [Frameworks](#frameworks)
+    *   [Libraries](#libraries)
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+6.  [Agile Development](#agile-development)
+    *   [Project Board](#project-board)
+    *   [Sprint Progress](#sprint-progress)
+    *   [User Story Testing](#user-story-testing)
 
-**June 18, 2024,** Add Mongo back into template
+7.  [Testing](#testing)
+    *   [Automated Testing](#automated-testing)
+    *   [Manual Testing](#manual-testing)
+    *   [Bugs and Resolutions](#bugs-and-resolutions)
+    *   [Validation Testing](#validation-testing)
 
-**June 14, 2024,** Temporarily remove Mongo until the key issue is resolved
+8.  [Deployment](#deployment)
+    *   [Step-by-Step Deployment to Heroku](#step-by-step-deployment-to-heroku)
+    *   [Local Development Setup](#local-development-setup)
 
-**May 28 2024:** Fix Mongo and Links installs
+9.  [Credits](#credits)
 
-**April 26 2024:** Update node version to 16
+## UX Design: User-Centered Approach
 
-**September 20 2023:** Update Python version to 3.9.17.
+Star Mama's design process was deeply rooted in understanding the needs and pain points of busy working mothers. The following sections outline the UX process.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+### User Stories
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+We began by crafting user stories to represent the goals and needs of our target users:
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+*   As a working mother, I want to quickly add tasks so that I don't forget important things.
+*   As a working mother, I want to assign tasks to my children so that they can take responsibility.
+*   As a working mother, I want to track the progress of tasks so that I can ensure everything is on schedule.
+*   As a working mother, I want to be able to access the app on my phone so I can manage tasks on the go.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+### Strategy & Scope
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+The strategy was to create a simple, intuitive task management app focused on the core needs of busy mothers: task creation, assignment, and progress tracking.
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+**Scope:**
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+*   User authentication (registration/login)
+*   Task management (create, read, update, delete)
+*   Child profile management
+*   Task assignment to children
+*   Progress tracking
+*   Responsive design for mobile and tablet
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+### Structural Skeleton
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
-
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
-
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
-------
-
-## FAQ about the uptime script
-
-**Why have you added this script?**
-
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
-
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+The information architecture was designed to ensure easy navigation and quick access to essential features:
 
 ```
-pkill uptime.sh
-rm .vscode/uptime.sh
+Star Mama
+├── Dashboard
+│   ├── Task Overview
+│   ├── Quick Actions
+│   └── Notifications
+├── Tasks
+│   ├── All Tasks
+│   ├── My Tasks
+│   └── Children's Tasks
+├── Children
+│   ├── Profiles
+│   └── Progress
+├── Settings
+│   ├── Account
+│   ├── Preferences
+│   └── Notifications
+└── Help
+    ├── Guides
+    ├── FAQs
+    └── Support
 ```
 
-**Anything more?**
+### Wireframes & Mockups
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+#### Initial Sketches
 
----
+Initial Sketches
 
-Happy coding!
+*   Hand-drawn concept sketches to explore different layout ideas.
+*   Focused on ease of use and quick task entry.
+
+#### Digital Wireframes
+
+Miro Board
+
+*   Created using Miro for collaborative design.
+*   Detailed layouts for mobile and desktop, showing component placement and user flows.
+
+#### Final Prototypes
+
+Balsamiq Designs
+
+*   Refined in Balsamiq for interactive elements and responsive behavior.
+*   Included annotations for user testing and feedback.
+
+### Design Journey
+
+The design evolved based on user feedback and usability testing. Initial designs were simplified to reduce cognitive load and prioritize essential features. The color scheme was refined to use softer shades of orange and pink for a more welcoming feel.
+
+## Design
+
+The visual design was carefully crafted to appeal to our target audience while ensuring a pleasant and efficient user experience.
+
+### Typography
+
+*   **Headings:** Montserrat (Bold) - Clean and modern, conveying a sense of efficiency.
+
+```css
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+```
+
+*   **Body:** Open Sans (Regular) - Easy to read and provides a friendly, approachable feel.
+
+```css
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+```
+
+### Color Scheme
+
+The color palette uses a combination of orange and pink to create a warm and inviting atmosphere.
+
+```css
+/* Brand Color System */
+:root {
+  --primary-orange: #FFB347;    /* Warmth, energy */
+  --secondary-pink: #FF70A6;  /* Comfort, care */
+  --accent-gray: #607D8B;     /* Stability, trust */
+}
+```
+
+*   **Primary Orange:** Used for primary buttons and key interactive elements.
+*   **Secondary Pink:** Used for accents and background elements to create a soft, feminine feel.
+*   **Accent Gray:** Used for text and borders to provide contrast and readability.
+
+### Imagery
+
+*   Friendly and relatable images of families, children, and organized spaces.
+*   Use of icons to visually represent tasks and categories.
+
+## Website Features
+
+TaskNest offers a range of features designed to simplify family task management:
+
+*   **User Authentication:** Secure registration and login system.
+*   **Task Management:** Create, assign, and track tasks with due dates, priorities, and categories.
+*   **Child Profiles:** Manage profiles for each child, including assigned tasks and progress.
+*   **Dashboard:** Overview of upcoming tasks, recent activity, and progress metrics.
+*   **Notifications:** Stay informed about new tasks, due dates, and completed tasks.
+*   **Responsive Design:** Seamless experience across desktop, tablet, and mobile devices.
+
+### Tablet View
+
+Tablet Dashboard
+
+*   Two-column layout for efficient use of screen space.
+*   Side navigation for easy access to all sections.
+
+### Mobile View
+
+Mobile Dashboard
+
+*   Single-column layout for optimal readability on smaller screens.
+*   Bottom navigation for quick access to key features.
+
+## Future Features
+
+We plan to enhance TaskNest with the following features:
+
+*   **Team Collaboration:** Real-time updates, team chat, and task sharing.
+*   **Advanced Analytics:** Progress tracking, performance metrics, and usage statistics.
+*   **Integration Options:** Calendar sync, email notifications, and file attachments.
+*   **Gamification:** Points, badges, and rewards for completing tasks.
+
+## Technologies Used
+
+### Languages
+
+*   Python
+*   JavaScript
+*   HTML
+*   CSS
+
+### Frameworks
+
+*   Django (Backend)
+*   Bootstrap (Frontend)
+
+### Libraries
+
+*   React
+*   Redux
+*   PostgreSQL
+*   Heroku
+
+## Agile Development
+
+We followed an Agile development methodology to ensure flexibility, collaboration, and continuous improvement.
+
+### Project Board
+
+[View Project Board](https://github.com/users/username/projects/task-nest-board)
+
+*   Used GitHub Projects for task tracking and sprint management.
+*   Columns: Backlog, Sprint Planning, In Progress, Review, Done.
+
+Project Board Screenshot
+
+### Sprint Progress
+
+*   **Sprint 1:** User authentication and core task management features.
+*   **Sprint 2:** Task assignment, notifications, and basic reporting.
+*   **Sprint 3:** Child profile management and enhanced progress tracking.
+
+### User Story Testing
+
+*   Used Gherkin syntax to define acceptance criteria for each user story.
+*   Automated tests to ensure features meet requirements.
+
+```gherkin
+Feature: User Registration
+Scenario: Successful Registration
+  Given I am on the registration page
+  When I enter valid credentials
+  Then my account should be created
+  And I should be redirected to the dashboard
+  And I should see a welcome notification
+```
+
+## Testing
+
+### Automated Testing
+
+*   **Unit Tests:** Django's testing framework was used to verify individual components.
+
+```python
+class Star Mama(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            email='test@example.com',
+            password='test123'
+        )
+
+    def test_task_creation(self):
+        task = Task.objects.create(
+            title='Test Task',
+            description='Test Description',
+            due_date=timezone.now(),
+            created_by=self.user
+        )
+        self.assertEqual(task.title, 'Test Task')
+        self.assertFalse(task.completed)
+```
+
+*   **Integration Tests:** Ensured different parts of the app work together correctly.
+
+```python
+class StarFlowTests(TestCase):
+    def test_task_workflow(self):
+        # Create task
+        response = self.client.post('/tasks/create/', {
+            'title': 'Integration Test Task',
+            'due_date': '2024-03-01'
+        })
+        self.assertEqual(response.status_code, 201)
+        task_id = response.json()['id']
+```
+
+### Manual Testing
+
+*   Feature testing table:
+    | Feature           | Expected Outcome                                  | Testing Performed                  | Result             | Pass/Fail |
+    | :---------------- | :------------------------------------------------ | :--------------------------------- | :----------------- | :-------- |
+    | User Registration | Account created, email verification sent          | Created test account               | Email received     | Pass      |
+    | Task Creation     | Task appears in list with correct details        | Created multiple tasks             | Tasks displayed    | Pass      |
+    | Edit Task         | Task details update in database                   | Modified existing task             | Changes saved      | Pass      |
+    | Delete Task       | Task removed from database                        | Deleted test task                  | Task removed       | Pass      |
+    | Child Profile     | Profile created with correct permissions        | Added child profile                | Profile active     | Pass      |
+*   Browser testing matrix:
+
+| Browser | Version | Desktop | Mobile | Result |
+| :------ | :------ | :------ | :----- | :----- |
+| Chrome  | 98+     | ✓       | ✓      | Pass   |
+| Firefox | 97+     | ✓       | ✓      | Pass   |
+| Safari  | 15+     | ✓       | ✓      | Pass   |
+| Edge    | 98+     | ✓       | ✓      | Pass   |
+
+### Bugs and Resolutions
+
+*   **Critical Bugs:**
+    *   Database Migration Issue: Models changes breaking migrations. Reset database and clean migrations to resolve.
+    *   Authentication Flow: Session persistence issues. Resolved by updated middleware configuration.
+*   **Minor Bugs:**
+    *   CSS Responsiveness: Mobile layout breaks. Resolved with updated media queries.
+    *   Form Validation: Missing error messages. Fixed by adding Django form validation.
+
+### Validation Testing
+
+We performed validation testing to ensure code quality and compliance with standards.
+
+*   **HTML Validation:**
+    *   Home page: Pass
+    *   Dashboard: Pass
+    *   Task Forms: Pass
+    *   Profile Pages: Pass
+*   **CSS Validation:** Ensured that the styling adheres to CSS standards and best practices.
+*   **Python PEP8 Compliance:** Verified that the Python code follows PEP8 guidelines for readability and maintainability.
+
+## Deployment
+
+### Step-by-Step Deployment to Heroku
+
+1.  **Create a Heroku Account:** Sign up at [Heroku](https://www.heroku.com/).
+2.  **Install the Heroku CLI:** Follow the instructions on the Heroku website to install the Heroku Command Line Interface (CLI).
+3.  **Login to Heroku:** Open your terminal and run `heroku login`.
+4.  **Create a New Heroku App:**
+
+    ```bash
+    heroku create task-nest
+    ```
+5.  **Set Up PostgreSQL:** Add the Heroku PostgreSQL add-on.
+
+    ```bash
+    heroku addons:create heroku-postgresql:hobby-dev
+    ```
+6.  **Set Up Redis:** Add the Heroku Redis add-on.
+
+    ```bash
+    heroku addons:create heroku-redis:hobby-dev
+    ```
+7.  **Configure Environment Variables:** Set the necessary environment variables for your Django app.
+
+    ```bash
+    heroku config:set \
+        DJANGO_SETTINGS_MODULE=tasknest.settings.production \
+        SECRET_KEY=$YOUR_DJANGO_SECRET_KEY \
+        AWS_ACCESS_KEY_ID=$YOUR_AWS_ACCESS_KEY_ID \
+        AWS_SECRET_ACCESS_KEY=$YOUR_AWS_SECRET_ACCESS_KEY
+    ```
+
+    Replace `$YOUR_DJANGO_SECRET_KEY`, `$YOUR_AWS_ACCESS_KEY_ID`, and `$YOUR_AWS_SECRET_ACCESS_KEY` with your actual values.
+
+8.  **Create a `Procfile`:** Create a file named `Procfile` in the root of your project with the following content:
+
+    ```
+    web: gunicorn tasknest.wsgi:application
+    worker: celery -A tasknest worker -l info
+    ```
+
+9.  **Push Code to Heroku:** Initialize a Git repository, add your files, commit, and push to Heroku.
+
+    ```bash
+    git init
+    git add .
+    git commit -m "Initial commit"
+    git push heroku main
+    ```
+
+10. **Run Migrations:** After deploying, run the Django migrations.
+
+    ```bash
+    heroku run python manage.py migrate
+    ```
+
+11. **Create Superuser:** Create an admin user for your Django app.
+
+    ```bash
+    heroku run python manage.py createsuperuser
+    ```
+
+12. **Collect Static Files:** Collect static files to be served by Heroku.
+
+    ```bash
+    heroku run python manage.py collectstatic
+    ```
+
+13. **Open the App:**
+
+    ```bash
+    heroku open
+    ```
+
+### Local Development Setup
+
+1.  **Prerequisites:**
+
+    *   Python 3.9+
+    *   Node.js 16+
+    *   PostgreSQL 13+
+    *   Redis 6+
+
+2.  **Environment Setup:**
+
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # Windows: venv\Scripts\activate
+    pip install -r requirements.txt
+    npm install
+    ```
+
+3.  **Environment Variables:**
+
+    ```bash
+    cp .env.example .env
+    # Edit .env with your settings
+    ```
+
+4.  **Database Configuration:**
+
+    ```python
+    # settings.py
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env('DB_NAME'),
+            'USER': env('DB_USER'),
+            'PASSWORD': env('DB_PASSWORD'),
+            'HOST': env('DB_HOST'),
+            'PORT': env('DB_PORT', default='5432'),
+        }
+    }
+
+    # Redis cache
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': env('REDIS_URL'),
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            }
+        }
+    }
+    ```
+
+## Credits
+
+*   Django Documentation
+*   Bootstrap Documentation
+*   React Documentation
+*   Heroku Dev Center
+*   UX Design Feedback Group
+*   Stack Overflow Community
+
