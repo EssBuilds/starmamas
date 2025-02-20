@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -9,8 +10,8 @@
                 <p class="text-center">Are you sure you want to delete "{{ object.title }}"?</p>
                 <form method="post" class="text-center">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                    <a href="{% url 'todo_list' %}" class="btn btn-light ms-2">Cancel</a>
+                    <button type="submit" class="btn btn-danger" onclick="handleDeleteButtonClick()">Delete</button>
+                    <a href="{% url 'todo_list' %}" class="btn btn-light ms-2" onclick="handleCancelButtonClick()">Cancel</a>
                 </form>
             </div>
         </div>

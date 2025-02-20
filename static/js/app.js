@@ -170,6 +170,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    // ...existing code...
+
+    // Handle delete button click
+    window.handleDeleteButtonClick = function() {
+        console.log("Delete button clicked");
+        // Add your custom functionality here
+    };
+
+    // Handle cancel button click
+    window.handleCancelButtonClick = function() {
+        console.log("Cancel button clicked");
+        // Add your custom functionality here
+    };
+
+    // ...existing code...
+});
+
 /* Styles & Animations */
 document.head.insertAdjacentHTML("beforeend", `
 <style>
