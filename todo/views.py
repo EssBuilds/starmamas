@@ -11,8 +11,8 @@ def home(request):
     if request.user.is_authenticated:
         tasks = Task.objects.filter(user=request.user)
         children = Child.objects.filter(user=request.user)
-        return render(request, 'todo/home.html', {'tasks': tasks, 'children': children})
-    return render(request, 'todo/login.html')
+        return render(request, 'account/home.html', {'tasks': tasks, 'children': children})
+    return render(request, 'account/login.html')
 
 def register(request):
     if request.method == 'POST':
@@ -24,7 +24,7 @@ def register(request):
             return redirect('todo:home')
     else:
         form = RegisterForm()
-    return render(request, 'todo/register.html', {'form': form})
+    return render(request, 'account/register.html', {'form': form})
 
 def user_login(request):
     if request.method == 'POST':
@@ -40,7 +40,7 @@ def user_login(request):
         messages.error(request, "Invalid username or password")
     else:
         form = AuthenticationForm()
-    return render(request, 'todo/login.html', {'form': form})
+    return render(request, 'account/login.html', {'form': form})
 
 @login_required
 def user_logout(request):
@@ -60,7 +60,7 @@ def add_task(request):
             return redirect('todo:home')
     elif request.method == 'GET':
         form = TaskForm()
-        return render(request, 'todo/add_task.html', {'form': form})
+        return render(request, 'account/add_task.html', {'form': form})
     else:
         return HttpResponseNotAllowed(['GET', 'POST'])
 
@@ -75,7 +75,7 @@ def edit_task(request, task_id):
             return redirect('todo:home')
     else:
         form = TaskForm(instance=task)
-    return render(request, 'todo/edit_task.html', {'form': form})
+    return render(request, 'account/edit_task.html', {'form': form})
 
 @login_required
 def delete_task(request, task_id):

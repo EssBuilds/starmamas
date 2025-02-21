@@ -60,6 +60,8 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SITE_ID = 1
+
+LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT = '/'
 LOGOUT_REDIRECT = '/'
 
