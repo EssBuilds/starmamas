@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="glass-card p-4">
+                <h2 class="text-center mb-4">Login</h2>
+                <form id="loginForm" method="post" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="login" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-gradient w-100" onclick="handleLoginClick()">Login</button>
+                </form>
+                
+                <div class="text-center mt-3">
+                    <p>Don't have an account? <a href="{% url 'account_signup' %}" class="nav-btn">Register</a></p>
+                </div>
+                
+                <div class="mt-4">
+                    <p class="text-center">Or login with</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        {% get_providers as socialaccount_providers %}
+                        {% for provider in socialaccount_providers %}
+                        <a href="{% provider_login_url provider.id process='login' %}" class="btn nav-btn">
+                            <i class="fab fa-{{ provider.name|lower }}"></i>
+                            {{ provider.name }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    const submitButton = form.querySelector('button[type="submit"]');
+    
+    form.addEventListener('submit', (e) => {
+        if (form.checkValidity()) {
+            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Logging in...';
+            submitButton.disabled = true;
+        }
+    });
+});
+
+function handleLoginClick() {
+    console.log('Login button clicked');
+}
+</script>
+{% endblock %}

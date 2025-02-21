@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-
 {% block content %}
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -11,10 +10,10 @@
                 <form method="post">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <button type="submit" class="btn btn-gradient w-100 mt-3" onclick="handleRegisterClick()">Register</button>
+                    <button type="submit" class="btn nav-btn w-100 mt-3" onclick="handleRegisterClick()">Register</button>
                 </form>
                 <div class="text-center mt-3">
-                    <p>Already have an account? <a href="{% url 'login' %}" class="nav-btn" onclick="handleLoginClick()">Login</a></p>
+                    <p>Already have an account? <a href="{% url 'todo:login' %}" class="nav-btn" onclick="handleLoginClick()">Login</a></p>
                 </div>
             </div>
         </div>

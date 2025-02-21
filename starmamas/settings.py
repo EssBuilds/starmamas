@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     
-    
     # Third party apps
     'crispy_forms',
     'crispy_bootstrap5',
@@ -63,7 +62,7 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 LOGIN_REDIRECT = '/'
 LOGOUT_REDIRECT = '/'
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
+
 
 
 
@@ -80,6 +79,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'starmamas.urls'
+
+
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates') 
 
 TEMPLATES = [
     {
@@ -124,6 +126,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -132,7 +137,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files
