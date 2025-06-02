@@ -85,3 +85,7 @@ def delete_task(request, task_id):
         messages.success(request, "Task deleted!")
         return redirect('todo:home')
     return HttpResponseNotAllowed(['POST'])
+
+@login_required
+def profile(request):
+    return render(request, 'registration/profile.html', {'user': request.user})

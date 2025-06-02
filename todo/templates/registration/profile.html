@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="glass-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2><i class="bi bi-person-circle me-2"></i>My Profile</h2>
+                    <a href="{% url 'password_change' %}" class="nav-btn">
+                        <i class="bi bi-key me-1"></i>Change Password
+                    </a>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <div class="mb-3">
+                            <div class="profile-avatar" style="
+                                width: 150px;
+                                height: 150px;
+                                background: rgba(255,255,255,0.2);
+                                border-radius: 50%;
+                                margin: 0 auto;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 3rem;
+                                color: white;
+                            ">
+                                {{ user.username|first|upper }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-8">
+                        <div class="glass-card p-3 mb-3">
+                            <h4><i class="bi bi-info-circle me-2"></i>Account Information</h4>
+                            <hr>
+                            <p><strong>Username:</strong> {{ user.username }}</p>
+                            <p><strong>Email:</strong> {{ user.email|default:"Not provided" }}</p>
+                            <p><strong>Member since:</strong> {{ user.date_joined|date:"F j, Y" }}</p>
+                        </div>
+                        
+                        <div class="glass-card p-3">
+                            <h4><i class="bi bi-gear me-2"></i>Account Actions</h4>
+                            <hr>
+                            <div class="d-flex flex-wrap gap-2">
+                                <a href="{% url 'password_change' %}" class="nav-btn">
+                                    <i class="bi bi-key me-1"></i>Change Password
+                                </a>
+                                <a href="#" class="nav-btn">
+                                    <i class="bi bi-envelope me-1"></i>Update Email
+                                </a>
+                                <a href="#" class="nav-btn text-danger">
+                                    <i class="bi bi-trash me-1"></i>Delete Account
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
