@@ -2,8 +2,12 @@ from pathlib import Path
 import os
 import django_heroku
 import dj_database_url
+from dotenv import load_dotenv
+if os.path.isfile(os.path.join('env.py')):
+     
+    load_dotenv(dotenv_path=os.path.join('env.py'))
 
-
+load_dotenv()
 
 
 
@@ -17,9 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-+n1pb*v$fb-$!_3h8w&#lb#%u2l)p+enc)kl85^5_f56y6$h(u')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
-DEBUG = False
-
+DEBUG = os.environ.get('DEBUG', 'False') == 'False'
 
 ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -32,7 +34,6 @@ CSRF_TRUSTED_ORIGINS = [
 SESSION_COOKIE_SECURE = False  # True in production with HTTPS
 CSRF_COOKIE_SECURE = False     # True in production
 SESSION_COOKIE_SAMESITE = 'Lax'
-
 
 
 # Application definition
@@ -105,6 +106,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'starmamas.wsgi.application'
+
+
 # Database
 DATABASES = {
     'default': dj_database_url.parse(
@@ -160,9 +163,9 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Authentication Settings
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'profile'
+LOGIN_REDIRECT_URL = 'todo_list'
 LOGOUT_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
 
 # Messages
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
