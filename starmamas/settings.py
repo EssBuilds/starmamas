@@ -17,9 +17,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-+n1pb*v$fb-$!_3h8w&#lb#%u2l)p+enc)kl85^5_f56y6$h(u')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-<<<<<<< HEAD
+
 DEBUG = False
-======
+
 
 ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -32,7 +32,7 @@ CSRF_TRUSTED_ORIGINS = [
 SESSION_COOKIE_SECURE = False  # True in production with HTTPS
 CSRF_COOKIE_SECURE = False     # True in production
 SESSION_COOKIE_SAMESITE = 'Lax'
->>>>>>> f1102da3c10db0bb8e4b703db33660f03903f3c3
+
 
 
 # Application definition
