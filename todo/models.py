@@ -30,7 +30,6 @@ class Child(models.Model):
     def __str__(self):
         return f"{self.name} ({self.age} years old)" if self.age else self.name
 
-
 class Task(models.Model):
     """
     Represents a task in the to-do list.
@@ -69,6 +68,8 @@ class Task(models.Model):
         blank=True,
         help_text="A detailed description of the task (optional)."
     )
+    completed = models.BooleanField(default=False)
+
     priority = models.CharField(
         max_length=10,
         choices=PRIORITY_CHOICES,
@@ -97,3 +98,4 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
+

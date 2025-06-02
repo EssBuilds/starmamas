@@ -5,6 +5,8 @@ import dj_database_url
 
 
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -15,9 +17,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-+n1pb*v$fb-$!_3h8w&#lb#%u2l)p+enc)kl85^5_f56y6$h(u')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+<<<<<<< HEAD
 DEBUG = False
+=======
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000', 
+    'https://starmamas-e6bdaca50ef1.herokuapp.com/',
+    'http://127.0.0.1:8000'
+]
+
+SESSION_COOKIE_SECURE = False  # True in production with HTTPS
+CSRF_COOKIE_SECURE = False     # True in production
+SESSION_COOKIE_SAMESITE = 'Lax'
+>>>>>>> f1102da3c10db0bb8e4b703db33660f03903f3c3
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -27,6 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+     # Django core
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     
     # Third party apps
     'crispy_forms',
@@ -35,6 +57,20 @@ INSTALLED_APPS = [
     # Local apps
     'todo',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+
+LOGIN_URL = "/accounts/login/"
+LOGIN_REDIRECT = '/'
+LOGOUT_REDIRECT = '/'
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -45,9 +81,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'starmamas.urls'
+
+
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates') 
 
 TEMPLATES = [
     {
@@ -92,6 +132,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -100,7 +143,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files
