@@ -21,14 +21,11 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('todo.urls')),
-<<<<<<< HEAD
+    path('accounts/', include('allauth.urls')),
     path('password_change/', 
          auth_views.PasswordChangeView.as_view(
              template_name='registration/password_change.html',
              success_url='/profile/'
          ), 
          name='password_change'),
-=======
-    path('accounts/', include('allauth.urls'))
->>>>>>> f1102da3c10db0bb8e4b703db33660f03903f3c3
 ]
