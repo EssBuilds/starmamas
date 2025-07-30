@@ -17,18 +17,53 @@ class Child(models.Model):
         max_length=100,
         help_text="The name of the child."
     )
-    age = models.PositiveIntegerField(
-        null=True,
-        blank=True,
-        help_text="The age of the child (optional)."
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        help_text="Timestamp when the child record was created."
-    )
+    # Temporarily commenting out age and created_at fields until migration is applied
+    # age = models.PositiveIntegerField(
+    #     null=True,
+    #     blank=True,
+    #     help_text="The age of the child (optional)."
+    # )
+    # created_at = models.DateTimeField(
+    #     auto_now_add=True,
+    #     help_text="Timestamp when the child record was created."
+    # )
+
+    def save(self, *args, **kwargs):
+        """
+        Custom save method to handle database schema mismatch
+        """
+        from django.db import connection
+        
+        # Check if age column exists before trying to save
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT column_name 
+                FROM information_schema.columns 
+                WHERE table_name='todo_child' AND column_name='age'
+            """)
+            age_exists = cursor.fetchone() is not None
+            
+        if not age_exists:
+            # If age column doesn't exist, save manually with only existing fields
+            if not self.pk:  # New record
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        "INSERT INTO todo_child (user_id, name) VALUES (%s, %s) RETURNING id",
+                        [self.user_id, self.name]
+                    )
+                    self.pk = cursor.fetchone()[0]
+            else:  # Update existing record
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        "UPDATE todo_child SET name = %s WHERE id = %s",
+                        [self.name, self.pk]
+                    )
+        else:
+            # Normal save if all columns exist
+            super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.name} ({self.age} years old)" if self.age else self.name
+        return self.name
 
 class Task(models.Model):
     """

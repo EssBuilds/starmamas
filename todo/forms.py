@@ -18,4 +18,4 @@ class TaskForm(forms.ModelForm):
 class ChildForm(forms.ModelForm):
     class Meta:
         model = Child
-        fields = ['name']  # Temporarily remove 'age' until migration is applied
+        fields = ['name']  # Only include name field until migration is applied

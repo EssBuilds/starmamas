@@ -6,7 +6,7 @@ from .models import Child, Task
 
 @admin.register(Child)
 class ChildAdmin(admin.ModelAdmin):
-    list_display = ('name', 'age', 'user', 'created_at')
+    list_display = ('name', 'user')  # Temporarily removed 'age' and 'created_at'
     search_fields = ('name', 'user__username')
 
 @admin.register(Task)
