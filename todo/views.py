@@ -87,5 +87,21 @@ def delete_task(request, task_id):
     return HttpResponseNotAllowed(['POST'])
 
 @login_required
+def add_child(request):
+    if request.method == 'POST':
+        form = ChildForm(request.POST)
+        if form.is_valid():
+            child = form.save(commit=False)
+            child.user = request.user
+            child.save()
+            messages.success(request, "Family member added!")
+            return redirect('todo:home')
+    elif request.method == 'GET':
+        form = ChildForm()
+        return render(request, 'account/add_child.html', {'form': form})
+    else:
+        return HttpResponseNotAllowed(['GET', 'POST'])
+
+@login_required
 def profile(request):
     return render(request, 'registration/profile.html', {'user': request.user})
