@@ -33,6 +33,7 @@ class Child(models.Model):
         Custom save method to handle database schema mismatch
         """
         from django.db import connection
+        from django.utils import timezone
         
         # Check if age column exists before trying to save
         with connection.cursor() as cursor:
@@ -48,8 +49,8 @@ class Child(models.Model):
             if not self.pk:  # New record
                 with connection.cursor() as cursor:
                     cursor.execute(
-                        "INSERT INTO todo_child (user_id, name) VALUES (%s, %s) RETURNING id",
-                        [self.user_id, self.name]
+                        "INSERT INTO todo_child (user_id, name, created_at) VALUES (%s, %s, %s) RETURNING id",
+                        [self.user_id, self.name, timezone.now()]
                     )
                     self.pk = cursor.fetchone()[0]
             else:  # Update existing record
