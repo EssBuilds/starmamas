@@ -10,11 +10,6 @@
                 <label for="childName" class="form-label">Name</label>
                 <input type="text" class="form-control" id="childName" name="name" required>
             </div>
-            <div class="mb-3">
-                <label for="childAge" class="form-label">Age</label>
-                <input type="number" class="form-control" id="childAge" name="age" min="0" max="150">
-                <div class="form-text">Optional - leave blank if you prefer not to specify age</div>
-            </div>
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-gradient">Add Family Member</button>
                 <a href="{% url 'todo:home' %}" class="btn btn-secondary">Cancel</a>
