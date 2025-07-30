@@ -10,7 +10,7 @@ from .forms import TaskForm, ChildForm, RegisterForm
 def home(request):
     if request.user.is_authenticated:
         tasks = Task.objects.filter(user=request.user)
-        children = Child.objects.filter(user=request.user)
+        children = Child.objects.filter(user=request.user).only('id', 'user_id', 'name')
         return render(request, 'account/home.html', {'tasks': tasks, 'children': children})
     return render(request, 'account/login.html')
 
