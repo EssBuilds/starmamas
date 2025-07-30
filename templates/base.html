@@ -1,7 +1,6 @@
 {% load static %}
 {% load socialaccount %}
 
-{% url 'about' as about_url %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as register_url %}
 {% url 'account_logout' as logout_url %}
@@ -397,20 +396,20 @@
         <!-- Updated Navigation Bar -->
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand nav-btn" href="#">Home</a>
+                <a class="navbar-brand nav-btn" href="{% url 'todo:home' %}">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-btn" href="#" id="login-link">Login</a>
+                            <a class="nav-btn" href="{{ login_url }}" id="login-link">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-btn" href="#" id="register-link">Register</a>
+                            <a class="nav-btn" href="{{ register_url }}" id="register-link">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-btn" href="#" id="logout-link" style="display: none;">Logout</a>
+                            <a class="nav-btn" href="{{ logout_url }}" id="logout-link" style="display: none;">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -448,5 +447,11 @@
             Task added successfully!
         </div>
     </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    {% block extra_js %}
+    {% endblock extra_js %}
 </body>
 </html>
