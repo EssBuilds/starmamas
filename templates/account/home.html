@@ -92,9 +92,7 @@
                     <div class="card mb-2">
                         <div class="card-body py-2">
                             <h6 class="card-title mb-1">{{ child.name }}</h6>
-                            {% if child.age %}
-                                <small class="text-muted">Age: {{ child.age }}</small>
-                            {% endif %}
+                            <small class="text-muted">Family member</small>
                         </div>
                     </div>
                     {% endfor %}
@@ -117,8 +115,10 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <h4 class="text-success">{{ tasks|length|add:"-"|add:tasks.count }}</h4>
-                        <small class="text-muted">Completed</small>
+                        {% with completed_tasks=tasks|length %}
+                        <h4 class="text-success">{{ completed_tasks }}</h4>
+                        <small class="text-muted">Tasks</small>
+                        {% endwith %}
                     </div>
                 </div>
             </div>
