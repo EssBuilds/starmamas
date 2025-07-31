@@ -96,10 +96,25 @@
                     {% for child in children %}
                     <div class="card mb-2">
                         <div class="card-body py-2">
-                            <h6 class="card-title mb-1">{{ child.name }}</h6>
-                            <small class="text-muted">
-                                Family member
-                            </small>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="card-title mb-1">{{ child.name }}</h6>
+                                    <small class="text-muted">
+                                        Family member
+                                    </small>
+                                </div>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="{% url 'todo:edit_child' child.id %}" class="btn btn-outline-primary btn-sm" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form method="post" action="{% url 'todo:delete_child' child.id %}" class="d-inline" onsubmit="return confirm('Are you sure you want to remove {{ child.name }}?')">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-outline-danger btn-sm" title="Delete">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     {% endfor %}

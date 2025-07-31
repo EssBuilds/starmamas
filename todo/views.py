@@ -103,5 +103,27 @@ def add_child(request):
         return HttpResponseNotAllowed(['GET', 'POST'])
 
 @login_required
+def edit_child(request, child_id):
+    child = get_object_or_404(Child, id=child_id, user=request.user)
+    if request.method == 'POST':
+        form = ChildForm(request.POST, instance=child)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Family member updated!")
+            return redirect('todo:home')
+    else:
+        form = ChildForm(instance=child)
+    return render(request, 'account/edit_child.html', {'form': form, 'child': child})
+
+@login_required
+def delete_child(request, child_id):
+    child = get_object_or_404(Child, id=child_id, user=request.user)
+    if request.method == 'POST':
+        child.delete()
+        messages.success(request, "Family member removed!")
+        return redirect('todo:home')
+    return HttpResponseNotAllowed(['POST'])
+
+@login_required
 def profile(request):
     return render(request, 'registration/profile.html', {'user': request.user})
