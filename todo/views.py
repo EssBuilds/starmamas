@@ -56,10 +56,23 @@ def add_task(request):
             task = form.save(commit=False)
             task.user = request.user
             task.save()
-            messages.success(request, "Task added!")
+            # Debug: Print which child was assigned
+            if task.child:
+                messages.success(request, f"Task '{task.title}' added and assigned to {task.child.name}!")
+            else:
+                messages.success(request, f"Task '{task.title}' added!")
             return redirect('todo:home')
+        else:
+            # Debug: Show form errors
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
     elif request.method == 'GET':
         form = TaskForm(user=request.user)
+        # Debug: Check if user has children
+        children_count = request.user.children.count()
+        if children_count == 0:
+            messages.info(request, "You haven't added any family members yet. Add family members to assign tasks to them.")
         return render(request, 'account/add_task.html', {'form': form})
     else:
         return HttpResponseNotAllowed(['GET', 'POST'])
@@ -70,11 +83,24 @@ def edit_task(request, task_id):
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=task, user=request.user)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Task updated!")
+            updated_task = form.save()
+            # Debug: Print which child was assigned
+            if updated_task.child:
+                messages.success(request, f"Task '{updated_task.title}' updated and assigned to {updated_task.child.name}!")
+            else:
+                messages.success(request, f"Task '{updated_task.title}' updated!")
             return redirect('todo:home')
+        else:
+            # Debug: Show form errors
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
     else:
         form = TaskForm(instance=task, user=request.user)
+        # Debug: Check if user has children
+        children_count = request.user.children.count()
+        if children_count == 0:
+            messages.info(request, "You haven't added any family members yet. Add family members to assign tasks to them.")
     return render(request, 'account/edit_task.html', {'form': form})
 
 @login_required
