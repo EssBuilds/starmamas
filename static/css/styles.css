@@ -71,6 +71,36 @@
     font-size: 0.875rem;
 }
 
+/* Task Card Styles */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 1.25rem;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-footer {
+    padding: 0.75rem 1.25rem;
+    background-color: rgba(0, 0, 0, 0.03) !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-footer .btn {
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
 /* Ensure buttons are visible on all screen sizes */
 @media (max-width: 576px) {
     .family-member-actions {
@@ -82,6 +112,27 @@
         min-width: 28px;
         padding: 0.2rem 0.3rem;
         font-size: 0.75rem;
+    }
+    
+    .card-body {
+        min-height: 180px;
+        padding: 1rem;
+    }
+    
+    .card-footer {
+        padding: 0.5rem 1rem;
+    }
+    
+    .card-footer .d-flex {
+        flex-wrap: wrap !important;
+        gap: 0.25rem;
+    }
+    
+    .card-footer .btn {
+        flex: 1;
+        min-width: 80px;
+        margin-right: 0;
+        margin-bottom: 0.25rem;
     }
 }
 
