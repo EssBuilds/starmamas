@@ -9,7 +9,7 @@ from .forms import TaskForm, ChildForm, RegisterForm
 
 def home(request):
     if request.user.is_authenticated:
-        tasks = Task.objects.filter(user=request.user)
+        tasks = Task.objects.filter(user=request.user).select_related('child').order_by('-created_at')
         children = Child.objects.filter(user=request.user).only('id', 'user_id', 'name')
         return render(request, 'account/home.html', {'tasks': tasks, 'children': children})
     return render(request, 'account/login.html')
@@ -51,7 +51,7 @@ def user_logout(request):
 @login_required
 def add_task(request):
     if request.method == 'POST':
-        form = TaskForm(request.POST)
+        form = TaskForm(request.POST, user=request.user)
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
@@ -59,7 +59,7 @@ def add_task(request):
             messages.success(request, "Task added!")
             return redirect('todo:home')
     elif request.method == 'GET':
-        form = TaskForm()
+        form = TaskForm(user=request.user)
         return render(request, 'account/add_task.html', {'form': form})
     else:
         return HttpResponseNotAllowed(['GET', 'POST'])
@@ -68,13 +68,13 @@ def add_task(request):
 def edit_task(request, task_id):
     task = get_object_or_404(Task, id=task_id, user=request.user)
     if request.method == 'POST':
-        form = TaskForm(request.POST, instance=task)
+        form = TaskForm(request.POST, instance=task, user=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, "Task updated!")
             return redirect('todo:home')
     else:
-        form = TaskForm(instance=task)
+        form = TaskForm(instance=task, user=request.user)
     return render(request, 'account/edit_task.html', {'form': form})
 
 @login_required
@@ -121,6 +121,18 @@ def delete_child(request, child_id):
     if request.method == 'POST':
         child.delete()
         messages.success(request, "Family member removed!")
+        return redirect('todo:home')
+    return HttpResponseNotAllowed(['POST'])
+
+@login_required
+def toggle_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id, user=request.user)
+    if request.method == 'POST':
+        task.completed = not task.completed
+        task.status = 'Completed' if task.completed else 'Pending'
+        task.save()
+        status_message = "marked as completed" if task.completed else "marked as pending"
+        messages.success(request, f"Task '{task.title}' {status_message}!")
         return redirect('todo:home')
     return HttpResponseNotAllowed(['POST'])
 

@@ -3,8 +3,8 @@
 {% block content %}
 <div class="container mt-5">
     <div class="glass-card p-4">
-        <h2 class="mb-4">Add New Task</h2>
-        <form method="post" action="{% url 'todo:add_task' %}">
+        <h2 class="mb-4">Edit Task</h2>
+        <form method="post">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="id_title" class="form-label">Task Title</label>
@@ -38,7 +38,7 @@
                 </label>
             </div>
             <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-gradient">Add Task</button>
+                <button type="submit" class="btn btn-gradient">Update Task</button>
                 <a href="{% url 'todo:home' %}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
@@ -64,33 +64,6 @@
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-}
-
-/* Style form controls */
-.form-control, .form-select {
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-}
-
-.form-control:focus, .form-select:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
-}
-</style>
-{% endblock %}
-
-<style>
-.btn-gradient {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: none;
-    color: white;
-    transition: transform 0.2s ease;
-}
-
-.btn-gradient:hover {
-    transform: translateY(-2px);
-    color: white;
 }
 </style>
 {% endblock %}

@@ -13,6 +13,7 @@ urlpatterns = [
     path('add_child/', views.add_child, name='add_child'),
     path('edit_task/<int:task_id>/', views.edit_task, name='edit_task'),
     path('delete_task/<int:task_id>/', views.delete_task, name='delete_task'),
+    path('toggle_task/<int:task_id>/', views.toggle_task, name='toggle_task'),
     path('edit_child/<int:child_id>/', views.edit_child, name='edit_child'),
     path('delete_child/<int:child_id>/', views.delete_child, name='delete_child'),
     path('profile/', views.profile, name='profile'),
