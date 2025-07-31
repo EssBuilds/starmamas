@@ -294,7 +294,7 @@
             font-family: 'Georgia', serif;
             font-weight: bold;
             font-size: 1.8rem;
-            background: linear-gradient(45deg, #ff6b6b, #feca57, #ff9ff3, #54a0ff);
+            background: linear-gradient(45deg, #4a148c, #6a1b9a, #8e24aa, #7b1fa2, #5e35b1, #3f51b5, #512da8, #4a148c);
             background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -317,9 +317,10 @@
         .star {
             display: inline-block;
             font-size: 1.5rem;
-            color: #ffd700;
+            color: #6a1b9a;
             animation: starTwinkle 2s ease-in-out infinite;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+            text-shadow: 0 0 10px rgba(106, 27, 154, 0.6);
+            filter: hue-rotate(270deg) brightness(1.2);
         }
 
         .star:nth-child(2) {
@@ -367,7 +368,7 @@
 
         /* Sparkle Effect */
         .star-mamas-brand::before {
-            content: '✨';
+            content: '💜';
             position: absolute;
             left: -30px;
             top: -10px;
@@ -377,7 +378,7 @@
         }
 
         .star-mamas-brand::after {
-            content: '✨';
+            content: '💜';
             position: absolute;
             right: -30px;
             bottom: -10px;
