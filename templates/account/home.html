@@ -94,30 +94,49 @@
                 
                 {% if children %}
                     {% for child in children %}
-                    <div class="card mb-2">
-                        <div class="card-body py-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-8">
                                     <h6 class="card-title mb-1">{{ child.name }}</h6>
                                     <small class="text-muted">
-                                        Family member
+                                        <i class="bi bi-person me-1"></i>Family member
                                     </small>
                                 </div>
-                                <div class="btn-group btn-group-sm">
-                                    <a href="{% url 'todo:edit_child' child.id %}" class="btn btn-outline-primary btn-sm" title="Edit">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <form method="post" action="{% url 'todo:delete_child' child.id %}" class="d-inline" onsubmit="return confirm('Are you sure you want to remove {{ child.name }}?')">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-outline-danger btn-sm" title="Delete">
-                                            <i class="bi bi-trash"></i>
+                                <div class="col-4 text-end">
+                                    <div class="btn-group" role="group">
+                                        <a href="{% url 'todo:edit_child' child.id %}" 
+                                           class="btn btn-outline-primary btn-sm" 
+                                           title="Edit {{ child.name }}">
+                                            <i class="bi bi-pencil me-1"></i>Edit
+                                        </a>
+                                        <button type="button" 
+                                                class="btn btn-outline-danger btn-sm"
+                                                onclick="deleteChild('{{ child.id }}', '{{ child.name }}')" 
+                                                title="Delete {{ child.name }}">
+                                            <i class="bi bi-trash me-1"></i>Delete
                                         </button>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {% endfor %}
+                    
+                    <!-- Hidden delete form -->
+                    <form id="deleteChildForm" method="post" style="display: none;">
+                        {% csrf_token %}
+                    </form>
+                    
+                    <script>
+                    function deleteChild(childId, childName) {
+                        if (confirm('Are you sure you want to remove ' + childName + '?')) {
+                            const form = document.getElementById('deleteChildForm');
+                            form.action = "{% url 'todo:delete_child' 0 %}".replace('0', childId);
+                            form.submit();
+                        }
+                    }
+                    </script>
                 {% else %}
                     <div class="text-center py-3">
                         <i class="bi bi-person-plus display-6 text-muted"></i>

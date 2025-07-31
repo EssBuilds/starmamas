@@ -50,6 +50,41 @@
     transition: all 0.2s ease;
 }
 
+/* Family Member Card Buttons */
+.family-member-actions {
+    display: flex !important;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+.family-member-actions .btn {
+    min-width: 32px;
+    padding: 0.25rem 0.375rem;
+    font-size: 0.875rem;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.family-member-actions .btn i {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+/* Ensure buttons are visible on all screen sizes */
+@media (max-width: 576px) {
+    .family-member-actions {
+        flex-direction: column;
+        gap: 0.125rem;
+    }
+    
+    .family-member-actions .btn {
+        min-width: 28px;
+        padding: 0.2rem 0.3rem;
+        font-size: 0.75rem;
+    }
+}
+
 .btn-action:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
