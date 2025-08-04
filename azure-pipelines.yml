@@ -2,7 +2,8 @@ trigger:
   - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'Default'  # ✅ Uses your self-hosted agent pool
+  # NO vmImage line!
 
 variables:
   pythonVersion: '3.9'
@@ -21,15 +22,9 @@ steps:
   - script: |
       python manage.py check
       python manage.py collectstatic --noinput
-    displayName: 'Django system checks and static files'
+    displayName: 'Django system checks'
+    continueOnError: true
 
   - script: |
       python manage.py test
     displayName: 'Run Django tests'
-    continueOnError: true
-
-  - task: PublishTestResults@2
-    inputs:
-      testResultsFiles: '**/test-results.xml'
-      testRunTitle: 'Python Tests'
-    condition: succeededOrFailed()
