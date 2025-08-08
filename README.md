@@ -2,8 +2,6 @@
 
 [View Live Site](https://starmamas-e6bdaca50ef1.herokuapp.com/#)
 
-Now I'll create a comprehensive README file that fulfills all the criteria in the attached assessment document. Based on my analysis, I can see there are significant discrepancies between what the current README claims and what's actually implemented in the code. I'll create an accurate README that matches the actual project implementation.
-
 # Star Mamas - Django Task Management Application
 
 ## Live Application
